@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
 
-const title = "智岸 AI | AI Coastal Sentinel";
+const title = "CoastWatch | 英国海岸机器学习风险研究";
 const description =
-  "AI-powered coastal safety research prototype combining edge vision, environmental intelligence and an explainable risk-fusion roadmap.";
+  "基于英国六个海岸历史数据与实时海况的可解释机器学习风险研究网站。展示未来六小时四级风险、模型证据与已知局限。";
 
 export async function generateMetadata(): Promise<Metadata> {
   const incoming = await headers();
@@ -12,19 +12,19 @@ export async function generateMetadata(): Promise<Metadata> {
   const forwardedProtocol = incoming.get("x-forwarded-proto")?.split(",")[0]?.trim();
   const protocol = forwardedProtocol ?? (host.startsWith("localhost") ? "http" : "https");
   const origin = new URL(`${protocol}://${host}`);
-  const socialImage = new URL("/og.png", origin).toString();
+  const socialImage = new URL("/og-coastwatch.png", origin).toString();
 
   return {
     metadataBase: origin,
     title,
     description,
-    keywords: ["AI Coastal Sentinel", "智岸 AI", "Edge AI", "OpenMV", "ESP32", "Coastal Safety"],
+    keywords: ["CoastWatch", "英国海岸风险", "机器学习", "Coastal Risk", "Explainable AI", "Marine Weather"],
     openGraph: {
       title,
       description,
       type: "website",
-      siteName: "AI Coastal Sentinel",
-      images: [{ url: socialImage, width: 1731, height: 909, alt: "智岸 AI — AI Coastal Sentinel" }],
+      siteName: "CoastWatch UK Coastal Risk Lab",
+      images: [{ url: socialImage, width: 1731, height: 909, alt: "CoastWatch — UK Coastal Risk Machine Learning Lab" }],
     },
     twitter: {
       card: "summary_large_image",

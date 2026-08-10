@@ -14,24 +14,25 @@ async function render() {
   );
 }
 
-test("server-renders the finished AI Coastal Sentinel landing page", async () => {
+test("server-renders the finished CoastWatch machine-learning dashboard", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>智岸 AI \| AI Coastal Sentinel<\/title>/i);
-  assert.match(html, /AI COASTAL SENTINEL/);
-  assert.match(html, /AI 驱动的海岸安全/);
+  assert.match(html, /<title>CoastWatch \| 英国海岸机器学习风险研究<\/title>/i);
+  assert.match(html, /COASTWATCH/);
+  assert.match(html, /英国海岸实时风险研究/);
   assert.match(html, /研究原型/);
-  assert.match(html, /不识别个人身份/);
-  assert.match(html, /模拟风险/);
+  assert.match(html, /机器学习风险评估/);
+  assert.match(html, /初步模型证据/);
+  assert.match(html, /研究原型 · 非官方公共预警/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
 });
 
-test("removes disposable starter assets and retains the final social card", async () => {
+test("retains the finished dashboard interactions and social card", async () => {
   await assert.rejects(access(new URL("../app/_sites-preview/", import.meta.url)));
-  await access(new URL("../public/og.png", import.meta.url));
+  await access(new URL("../public/og-coastwatch.png", import.meta.url));
 
   const [page, layout, packageJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
@@ -40,7 +41,8 @@ test("removes disposable starter assets and retains the final social card", asyn
   ]);
 
   assert.match(page, /setLanguage\("en"\)/);
-  assert.match(page, /AI RISK FUSION ROADMAP/);
-  assert.match(layout, /og\.png/);
+  assert.match(page, /fetchEnvironment/);
+  assert.match(page, /MODEL_META/);
+  assert.match(layout, /og-coastwatch\.png/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 });
