@@ -236,6 +236,34 @@ select:focus-visible {
   box-shadow: 0 0 10px rgba(255, 196, 91, 0.55);
 }
 
+.admin-access {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid rgba(112, 240, 202, 0.28);
+  background: rgba(112, 240, 202, 0.045);
+  color: var(--mint-soft);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.admin-access span {
+  color: var(--mint);
+  font-size: 7px;
+}
+
+.admin-access:hover {
+  border-color: rgba(112, 240, 202, 0.6);
+  background: rgba(112, 240, 202, 0.1);
+  color: var(--text);
+}
+
 .language-switch {
   display: flex;
   padding: 3px;
@@ -1612,6 +1640,8 @@ select:focus-visible {
   .brand-mark { width: 34px; height: 34px; }
   .brand small,
   .prototype-badge { display: none; }
+  .top-actions { gap: 8px; }
+  .admin-access { min-height: 34px; padding: 0 9px; font-size: 7px; }
   .overview { padding: 55px 0 75px; }
   .overview h1,
   .section-heading h2 { font-size: clamp(38px, 11vw, 54px); }

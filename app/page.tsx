@@ -318,6 +318,10 @@ export default function Home() {
         </nav>
         <div className="top-actions">
           <span className="prototype-badge"><i />{isZh ? "研究原型" : "Research prototype"}</span>
+          <a className="admin-access" href="/admin/login">
+            <span aria-hidden="true">◆</span>
+            {isZh ? "管理后台" : "Admin console"}
+          </a>
           <div className="language-switch" role="group" aria-label="Language">
             <button className={isZh ? "active" : ""} onClick={() => setLanguage("zh")} aria-pressed={isZh}>中</button>
             <button className={!isZh ? "active" : ""} onClick={() => setLanguage("en")} aria-pressed={!isZh}>EN</button>
