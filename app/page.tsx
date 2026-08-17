@@ -243,20 +243,18 @@ export default function Home() {
           <a href="#data">Data</a>
         </nav>
         <div className="top-actions">
-          <span className="prototype-badge"><i />Research prototype</span>
-          <a className="admin-access" href="/admin/login"><span aria-hidden="true">◇</span>Admin console</a>
+          <a className="admin-access" href="/admin/login"><span aria-hidden="true">◇</span>CONSOLE</a>
         </div>
       </header>
 
       <section className="study-hero section" id="project">
         <div className="study-title">
           <p className="kicker"><span>01</span>COASTAL DATA RESEARCH</p>
-          <h1>The Study of coastal risk related data in Great Yarmouth,England.</h1>
+          <h1>The Study of coastal risk related data in Great Yarmouth, England.</h1>
         </div>
 
         <div className="geography-heading">
-          <span>STUDY AREA</span>
-          <strong>Great Yarmouth geographic characteristics</strong>
+          <span>Coastline of Great Yarmouth</span>
         </div>
         <div className="geography-grid">
           {GEOGRAPHY.map((item) => (
@@ -433,9 +431,9 @@ export default function Home() {
         <div className="pipeline">
           {[
             ["01", "Labelled dataset", MODEL_META.rows.toLocaleString("en-GB"), "hourly rows"],
-            ["02", "Training split", MODEL_META.trainingRows.toLocaleString("en-GB"), "2023–2024"],
-            ["03", "Validation split", MODEL_META.validationRows.toLocaleString("en-GB"), "2025"],
-            ["04", "Test split", MODEL_META.testRows.toLocaleString("en-GB"), "2026 H1"],
+            ["02", "Training Set", MODEL_META.trainingRows.toLocaleString("en-GB"), "2023–2024"],
+            ["03", "Validation Set", MODEL_META.validationRows.toLocaleString("en-GB"), "2025"],
+            ["04", "Test Set", MODEL_META.testRows.toLocaleString("en-GB"), "2026 H1"],
           ].map((step, index) => (
             <article key={step[0]}>
               <span>{step[0]}</span><div><small>{step[1]}</small><strong>{step[2]}</strong><p>{step[3]}</p></div>
@@ -461,12 +459,10 @@ export default function Home() {
           </article>
 
           <article className="limitations-card">
-            <div className="panel-title"><div><span>KNOWN LIMITS</span><h3>Read the model carefully</h3></div><em>OPEN</em></div>
+            <div className="panel-title"><div><span>LIMITS AND FLAWS</span><h3>Current problems remaining</h3></div><em>OPEN</em></div>
             <ol>
-              <li><span>01</span><div><strong>One 2026 warning event</strong><p>The unsafe test class contains only 24 hours.</p></div></li>
-              <li><span>02</span><div><strong>Low unsafe precision</strong><p>{falsePositive.toLocaleString("en-GB")} false positives; {percent(metrics.unsafe.precision)} precision.</p></div></li>
-              <li><span>03</span><div><strong>Proxy label duration</strong><p>Historic removal times were unavailable.</p></div></li>
-              <li><span>04</span><div><strong>Modelled marine fields</strong><p>Not suitable for navigation.</p></div></li>
+              <li><span>01</span><div><strong>One 2026 warning event</strong><p>Very few positive samples in test set from 24 hours.</p></div></li>
+              <li><span>02</span><div><strong>Low unsafe precision</strong><p>Only {percent(metrics.unsafe.precision)} precision with {falsePositive.toLocaleString("en-GB")} false positives.</p></div></li>
             </ol>
           </article>
         </div>
