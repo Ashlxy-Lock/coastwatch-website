@@ -22,15 +22,18 @@ test("server-renders the simplified Great Yarmouth study", async () => {
   const html = await response.text();
   assert.match(html, /<title>The Study of coastal risk related data in Great Yarmouth, England<\/title>/i);
   assert.match(html, /COASTWATCH/);
-  assert.match(html, /The Study of coastal risk related data in Great Yarmouth,England\./);
-  assert.match(html, /Great Yarmouth geographic characteristics/);
+  assert.match(html, /The Study of coastal risk related data in Great Yarmouth, England\./);
+  assert.match(html, /Coastline of Great Yarmouth/);
   assert.match(html, /LIVE OPEN-METEO MODEL/);
   assert.match(html, /CURRENT SAFE PROBABILITY/);
   assert.match(html, /ALGORITHM EVALUATION/);
   assert.match(html, /TRUE POSITIVE/);
   assert.match(html, /PRECISION · UNSAFE/);
+  assert.match(html, /SINGLE-SITE BASELINE/);
+  assert.match(html, /No rule baseline yet/);
+  assert.match(html, /not calibrated disaster probabilities/i);
   assert.match(html, /href="\/admin\/login"/);
-  assert.match(html, /Admin console/);
+  assert.match(html, />CONSOLE<\/a>/);
   assert.match(html, /RESEARCH PROTOTYPE · NOT AN OFFICIAL PUBLIC WARNING/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
 });
@@ -58,7 +61,7 @@ test("uses live Open-Meteo inputs without restoring the location selector or moc
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 });
 
-test("ships the real Great Yarmouth dataset and matching binary model artifact", async () => {
+test("ships the non-synthetic Great Yarmouth dataset and matching exploratory model artifact", async () => {
   const [csv, warnings, metadataText, modelText, generatedModel] = await Promise.all([
     readFile(new URL("../data/great-yarmouth-coastal-training.csv", import.meta.url), "utf8"),
     readFile(new URL("../data/great-yarmouth-warning-events.csv", import.meta.url), "utf8"),

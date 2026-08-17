@@ -4,7 +4,7 @@ import "./globals.css";
 
 const title = "The Study of coastal risk related data in Great Yarmouth, England";
 const description =
-  "A binary Logistic Regression study trained on real historical weather, marine and coastal-alert records for Great Yarmouth, England.";
+  "An exploratory single-site Logistic Regression study using Open-Meteo modelled historical fields and coastal-alert-window proxy labels for Great Yarmouth, England.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const incoming = await headers();
