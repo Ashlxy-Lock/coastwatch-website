@@ -355,7 +355,7 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <p className="kicker"><span>03</span>ALGORITHM EVALUATION</p>
-            <h2>Labelled 2026 holdout,<em>including false alarms.</em></h2>
+            <h2>Hourly 2026 holdout,<em>including false positives.</em></h2>
           </div>
           <p>Test period: 1 January–30 June 2026. Positive class: unsafe. Decision threshold: {(MODEL_META.decisionThreshold * 100).toFixed(0)}%.</p>
         </div>
@@ -397,7 +397,7 @@ export default function Home() {
                 )))}
               </div>
             </div>
-            <p className="panel-note">{truePositive} of 24 unsafe hours were detected; {falsePositive} safe hours were false positives.</p>
+            <p className="panel-note">{truePositive} of 24 unsafe-labelled hours were detected; those 24 hours belong to one warning window, not 24 independent events. {falsePositive} safe hours were false positives.</p>
           </article>
 
           <article className="importance-card">
@@ -423,7 +423,7 @@ export default function Home() {
       <section className="method section" id="data">
         <div className="section-heading method-heading">
           <div>
-            <p className="kicker"><span>04</span>REAL TRAINING DATA</p>
+            <p className="kicker"><span>04</span>MODELLED HISTORICAL INPUTS</p>
             <h2>One location,<em>one auditable pipeline.</em></h2>
           </div>
         </div>
@@ -444,7 +444,7 @@ export default function Home() {
 
         <div className="research-grid">
           <article className="dataset-card">
-            <div className="panel-title"><div><span>DATASET CONTENTS</span><h3>Great Yarmouth · 2023–2026 H1</h3></div><em>REAL DATA</em></div>
+            <div className="panel-title"><div><span>DATASET CONTENTS</span><h3>Great Yarmouth · 2023–2026 H1</h3></div><em>SINGLE-SITE BASELINE</em></div>
             <div className="dataset-stats">
               <div><strong>{MODEL_META.rows.toLocaleString("en-GB")}</strong><span>valid rows</span></div>
               <div><strong>{MODEL_META.featureCount}</strong><span>model features</span></div>
@@ -454,7 +454,7 @@ export default function Home() {
             <ul className="dataset-list">
               <li><span>01</span>Weather: temperature, humidity, rain, wind, gusts and pressure.</li>
               <li><span>02</span>Marine: waves, sea level, sea temperature and currents.</li>
-              <li><span>03</span>Labels: real coastal-alert-derived safe and unsafe classes.</li>
+              <li><span>03</span>Labels: safe / unsafe proxy classes derived from a warning-issuance time window.</li>
             </ul>
           </article>
 
@@ -463,6 +463,8 @@ export default function Home() {
             <ol>
               <li><span>01</span><div><strong>One 2026 warning event</strong><p>Very few positive samples in test set from 24 hours.</p></div></li>
               <li><span>02</span><div><strong>Low unsafe precision</strong><p>Only {percent(metrics.unsafe.precision)} precision with {falsePositive.toLocaleString("en-GB")} false positives.</p></div></li>
+              <li><span>03</span><div><strong>Proxy target</strong><p>The label describes hours around an alert issuance; it is not a verified disaster outcome or a strictly future-only target.</p></div></li>
+              <li><span>04</span><div><strong>No rule baseline yet</strong><p>These metrics alone do not prove that Logistic Regression improves on a transparent threshold rule.</p></div></li>
             </ol>
           </article>
         </div>
@@ -470,12 +472,12 @@ export default function Home() {
 
       <section className="safety-note section">
         <span className="safety-icon">!</span>
-        <div><strong>RESEARCH PROTOTYPE · NOT AN OFFICIAL PUBLIC WARNING</strong><p>Do not use this model alone for evacuation, rescue, navigation or personal-safety decisions.</p></div>
+        <div><strong>RESEARCH PROTOTYPE · NOT AN OFFICIAL PUBLIC WARNING</strong><p>The displayed probabilities are classifier scores for proxy labels, not calibrated disaster probabilities. Do not use this model alone for evacuation, rescue, navigation or personal-safety decisions.</p></div>
       </section>
 
       <footer className="footer section">
         <div className="brand footer-brand"><span className="brand-mark" aria-hidden="true"><i /><i /><i /></span><span><strong>COASTWATCH</strong><small>GREAT YARMOUTH · DATA STUDY</small></span></div>
-        <p>DATA: OPEN-METEO · ENVIRONMENT AGENCY</p>
+        <p>INPUTS: OPEN-METEO MODEL / REANALYSIS · ALERT RECORDS: FLOODRADAR REPRODUCTION OF EA DATA</p>
         <a href="#project">Back to top ↑</a>
       </footer>
     </main>

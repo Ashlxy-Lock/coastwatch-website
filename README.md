@@ -99,11 +99,12 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 - [vinext Documentation](https://github.com/cloudflare/vinext)
 - [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
 
-## Great Yarmouth real-data model
+## Great Yarmouth exploratory single-site model
 
 The CoastWatch model is a binary Logistic Regression trained without synthetic
-coastal rows. Its reproducible data pipeline is in `scripts/` and its saved
-artifacts are in `data/`.
+coastal rows. It is an exploratory single-site baseline, not a verified
+operational coastal-warning model. Its reproducible data pipeline is in
+`scripts/` and its saved artifacts are in `data/`.
 
 - Location: Great Yarmouth, England (`52.60831, 1.73052`), resolved by the
   Open-Meteo Geocoding API.
@@ -111,7 +112,8 @@ artifacts are in `data/`.
 - Inputs: Open-Meteo historical air temperature, humidity, precipitation,
   rainfall, wind, gusts and pressure, plus historical wave height, wave period,
   sea-level height, sea-surface temperature and ocean currents.
-- Labels: `unsafe` when a real Environment Agency coastal-warning issuance is
+- Labels: `unsafe` when an Environment Agency coastal-warning issuance reproduced
+  by FloodRadar is
   within the documented event window (six hours before through 18 hours after
   issuance); `safe` otherwise. Historic removal times are not published, so the
   window is an explicit proxy rather than a claim that the warning remained in
@@ -120,6 +122,19 @@ artifacts are in `data/`.
   untouched January–June 2026 period for test. Class weights are fitted only on
   the training years. The threshold is selected from `0.75`–`0.95` on the 2025
   validation set by unsafe-class F2 and is currently `0.76`.
+
+Scientific limits that must accompany these results:
+
+- Open-Meteo weather fields are reanalysis values and the marine fields are
+  model-archive values; they are not direct observations from a Great Yarmouth
+  instrument station.
+- The warning-window label is a proxy for alert context, not a confirmed disaster
+  outcome and not a strictly future-only target.
+- The 2026 test set contains 24 unsafe-labelled hourly rows from one warning
+  window, so those rows are not 24 independent events.
+- No transparent water-level or weather-threshold baseline has yet been evaluated
+  on the same split. The current metrics therefore do not establish that machine
+  learning is better than a simple rule.
 
 Rebuild the data and model:
 
