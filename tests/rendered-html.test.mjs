@@ -14,39 +14,78 @@ async function render() {
   );
 }
 
-test("server-renders the finished CoastWatch machine-learning dashboard", async () => {
+test("server-renders the simplified Great Yarmouth study", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>CoastWatch \| 英国海岸机器学习风险研究<\/title>/i);
+  assert.match(html, /<title>The Study of coastal risk related data in Great Yarmouth, England<\/title>/i);
   assert.match(html, /COASTWATCH/);
-  assert.match(html, /英国海岸实时风险研究/);
-  assert.match(html, /研究原型/);
-  assert.match(html, /机器学习风险评估/);
+  assert.match(html, /The Study of coastal risk related data in Great Yarmouth,England\./);
+  assert.match(html, /Great Yarmouth geographic characteristics/);
+  assert.match(html, /LIVE OPEN-METEO MODEL/);
+  assert.match(html, /CURRENT SAFE PROBABILITY/);
+  assert.match(html, /ALGORITHM EVALUATION/);
+  assert.match(html, /TRUE POSITIVE/);
+  assert.match(html, /PRECISION · UNSAFE/);
   assert.match(html, /href="\/admin\/login"/);
-  assert.match(html, /管理后台/);
-  assert.match(html, /初步模型证据/);
-  assert.match(html, /研究原型 · 非官方公共预警/);
+  assert.match(html, /Admin console/);
+  assert.match(html, /RESEARCH PROTOTYPE · NOT AN OFFICIAL PUBLIC WARNING/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
 });
 
-test("retains the finished dashboard interactions and social card", async () => {
+test("uses live Open-Meteo inputs without restoring the location selector or mock fallback", async () => {
   await assert.rejects(access(new URL("../app/_sites-preview/", import.meta.url)));
   await access(new URL("../public/og-coastwatch.png", import.meta.url));
 
-  const [page, layout, packageJson] = await Promise.all([
+  const [page, layout, globals, packageJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /setLanguage\("en"\)/);
-  assert.match(page, /fetchEnvironment/);
   assert.match(page, /MODEL_META/);
+  assert.match(page, /predictRisk/);
+  assert.match(page, /fetchEnvironment/);
+  assert.match(page, /marine-api\.open-meteo\.com/);
+  assert.match(page, /Great Yarmouth/);
+  assert.doesNotMatch(page, /<select|coast-select|fallback:/);
+  assert.match(globals, /font-family: "Times New Roman", Times, serif/);
+  assert.match(globals, /--bg: #ffffff/);
   assert.match(layout, /og-coastwatch\.png/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+});
+
+test("ships the real Great Yarmouth dataset and matching binary model artifact", async () => {
+  const [csv, warnings, metadataText, modelText, generatedModel] = await Promise.all([
+    readFile(new URL("../data/great-yarmouth-coastal-training.csv", import.meta.url), "utf8"),
+    readFile(new URL("../data/great-yarmouth-warning-events.csv", import.meta.url), "utf8"),
+    readFile(new URL("../data/great-yarmouth-dataset-metadata.json", import.meta.url), "utf8"),
+    readFile(new URL("../data/great-yarmouth-logistic-model.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/trained-model.ts", import.meta.url), "utf8"),
+  ]);
+  const metadata = JSON.parse(metadataText);
+  const model = JSON.parse(modelText);
+  const rows = csv.trimEnd().split("\n");
+
+  assert.equal(metadata.contains_synthetic_data, false);
+  assert.equal(metadata.location.name, "Great Yarmouth");
+  assert.equal(rows.length - 1, metadata.rows);
+  assert.match(rows[0], /temperature_2m_c,relative_humidity_2m_percent,precipitation_mm,rain_mm/);
+  assert.match(rows[0], /wave_height_m,wave_period_s,sea_level_height_msl_m,sea_surface_temperature_c/);
+  assert.match(csv, /,unsafe\r?$/m);
+  assert.match(csv, /,safe\r?$/m);
+  assert.equal(warnings.trimEnd().split("\n").length - 1, metadata.warning_events);
+  assert.equal(model.model, "Binary Logistic Regression");
+  assert.deepEqual(Object.keys(model.label_counts).sort(), ["safe", "unsafe"]);
+  assert.equal(model.feature_names.length, model.coefficients.length);
+  assert.equal(model.test_confusion_matrix.flat().reduce((sum, value) => sum + value, 0), model.splits.test_2026.rows);
+  assert.ok(model.decision_threshold >= 0.75);
+  assert.equal(model.splits.validation_2025.rows, 8442);
+  assert.equal(model.test_confusion_matrix[1].reduce((sum, value) => sum + value, 0), model.splits.test_2026.labels.unsafe);
+  assert.match(generatedModel, new RegExp(model.version));
 });
 
 test("proxies only the fixed admin prefix without exposing device credentials", async () => {

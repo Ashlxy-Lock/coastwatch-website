@@ -98,3 +98,55 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
 - [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+
+## Great Yarmouth real-data model
+
+The CoastWatch model is a binary Logistic Regression trained without synthetic
+coastal rows. Its reproducible data pipeline is in `scripts/` and its saved
+artifacts are in `data/`.
+
+- Location: Great Yarmouth, England (`52.60831, 1.73052`), resolved by the
+  Open-Meteo Geocoding API.
+- Period: hourly data from 1 January 2023 through 30 June 2026.
+- Inputs: Open-Meteo historical air temperature, humidity, precipitation,
+  rainfall, wind, gusts and pressure, plus historical wave height, wave period,
+  sea-level height, sea-surface temperature and ocean currents.
+- Labels: `unsafe` when a real Environment Agency coastal-warning issuance is
+  within the documented event window (six hours before through 18 hours after
+  issuance); `safe` otherwise. Historic removal times are not published, so the
+  window is an explicit proxy rather than a claim that the warning remained in
+  force for exactly 24 hours.
+- Split: 2023–2024 for fitting, 2025 for threshold validation, and the smaller,
+  untouched January–June 2026 period for test. Class weights are fitted only on
+  the training years. The threshold is selected from `0.75`–`0.95` on the 2025
+  validation set by unsafe-class F2 and is currently `0.76`.
+
+Rebuild the data and model:
+
+```bash
+npm run data:build
+npm run model:train
+```
+
+Use `node scripts/build-training-data.mjs --reuse-warnings` to rebuild the
+Open-Meteo rows from the checked-in warning-event CSV without re-querying the
+warning history pages. The normal `data:build` command refreshes those records.
+
+Saved artifacts:
+
+- `data/great-yarmouth-coastal-training.csv` — labelled hourly training table.
+- `data/great-yarmouth-warning-events.csv` — warning issuances and provenance.
+- `data/great-yarmouth-dataset-metadata.json` — query URLs, grid coordinates,
+  missing-row exclusions, label policy and attribution.
+- `data/great-yarmouth-logistic-model.json` — coefficients, preprocessing,
+  class weights, split counts and test metrics.
+- `app/trained-model.ts` — generated browser inference artifact.
+
+Data sources: [Open-Meteo Historical Weather API](https://open-meteo.com/en/docs/historical-weather-api),
+[Open-Meteo Marine API](https://open-meteo.com/en/docs/marine-weather-api), and
+the Environment Agency [Historic Flood Warnings catalogue](https://environment.data.gov.uk/dataset/88bed270-d465-11e4-8669-f0def148f590).
+Open-Meteo's documented upstream marine providers, including DWD and
+Copernicus/ECMWF sources, are acknowledged in the dataset metadata.
+The checked-in event records were queried from FloodRadar's Great Yarmouth area
+pages, which identify their source as the Environment Agency, because the
+catalogue's ZIP host was not resolvable from this build environment.

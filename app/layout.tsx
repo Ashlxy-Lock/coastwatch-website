@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
 
-const title = "CoastWatch | 英国海岸机器学习风险研究";
+const title = "The Study of coastal risk related data in Great Yarmouth, England";
 const description =
-  "基于英国六个海岸历史数据与实时海况的可解释机器学习风险研究网站。展示未来六小时四级风险、模型证据与已知局限。";
+  "A binary Logistic Regression study trained on real historical weather, marine and coastal-alert records for Great Yarmouth, England.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const incoming = await headers();
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      siteName: "CoastWatch UK Coastal Risk Lab",
+      siteName: "Great Yarmouth Coastal Risk Data Study",
       images: [{ url: socialImage, width: 1731, height: 909, alt: "CoastWatch — UK Coastal Risk Machine Learning Lab" }],
     },
     twitter: {

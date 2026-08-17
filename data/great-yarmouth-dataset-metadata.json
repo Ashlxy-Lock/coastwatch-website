@@ -1,0 +1,136 @@
+{
+  "generated_at_utc": "2026-08-17T17:52:51.777Z",
+  "contains_synthetic_data": false,
+  "location": {
+    "name": "Great Yarmouth",
+    "admin1": "England",
+    "latitude": 52.60831,
+    "longitude": 1.73052,
+    "timezone": "Europe/London",
+    "geocodingSource": "https://geocoding-api.open-meteo.com/v1/search?name=Great%20Yarmouth&count=1&language=en&format=json"
+  },
+  "period": {
+    "start": "2023-01-01",
+    "end": "2026-06-30",
+    "resolution": "hourly",
+    "timezone": "GMT"
+  },
+  "rows": 30031,
+  "expected_rows": 30648,
+  "dropped_incomplete_rows": 617,
+  "incomplete_rows_by_required_field": {
+    "sea_level_height_msl_m": 443,
+    "ocean_current_velocity_kmh": 120,
+    "sea_surface_temperature_c": 312
+  },
+  "labels": {
+    "safe": 29672,
+    "unsafe": 359
+  },
+  "warning_events": 16,
+  "labeling_policy": {
+    "unsafe": "The sample falls between 6 hours before and 18 hours after an Environment Agency warning issuance (24-hour event window).",
+    "implementation": "unsafe when sample >= issuance - 6h and sample < issuance + 18h; safe otherwise",
+    "rationale": "The six hours before issuance align with the model forecast horizon; the following 18 hours retain the hazardous event context. The historic feed does not publish warning-removal times."
+  },
+  "sources": {
+    "weather": "Open-Meteo Historical Weather API (reanalysis)",
+    "marine": "Open-Meteo Marine API historical model archive",
+    "warnings": "Environment Agency warning history reproduced by FloodRadar; cross-reference to the EA Historic Flood Warnings catalogue",
+    "environment_agency_catalogue": "https://environment.data.gov.uk/dataset/88bed270-d465-11e4-8669-f0def148f590",
+    "warning_pages": [
+      "https://www.floodradar.co.uk/flood-area/054FWCDV3A1",
+      "https://www.floodradar.co.uk/flood-area/054FWCDV3A2",
+      "https://www.floodradar.co.uk/flood-area/054FWCDV3A3",
+      "https://www.floodradar.co.uk/flood-area/054FWCDV3A4",
+      "https://www.floodradar.co.uk/flood-area/054FWCDV3A5",
+      "https://www.floodradar.co.uk/flood-area/054FWCDV3A6",
+      "https://www.floodradar.co.uk/flood-area/054FWCDV3A7",
+      "https://www.floodradar.co.uk/flood-area/054WACDV3A"
+    ],
+    "api_requests": [
+      {
+        "weather": "https://archive-api.open-meteo.com/v1/archive?latitude=52.60831&longitude=1.73052&start_date=2023-01-01&end_date=2023-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cprecipitation%2Crain%2Cwind_speed_10m%2Cwind_gusts_10m%2Cpressure_msl%2Cweather_code&timezone=GMT&wind_speed_unit=kmh",
+        "marine": "https://marine-api.open-meteo.com/v1/marine?latitude=52.60831&longitude=1.73052&start_date=2023-01-01&end_date=2023-12-31&hourly=wave_height%2Cwave_period%2Csea_level_height_msl%2Csea_surface_temperature%2Cocean_current_velocity%2Cocean_current_direction&timezone=GMT&velocity_unit=kmh&cell_selection=sea"
+      },
+      {
+        "weather": "https://archive-api.open-meteo.com/v1/archive?latitude=52.60831&longitude=1.73052&start_date=2024-01-01&end_date=2024-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cprecipitation%2Crain%2Cwind_speed_10m%2Cwind_gusts_10m%2Cpressure_msl%2Cweather_code&timezone=GMT&wind_speed_unit=kmh",
+        "marine": "https://marine-api.open-meteo.com/v1/marine?latitude=52.60831&longitude=1.73052&start_date=2024-01-01&end_date=2024-12-31&hourly=wave_height%2Cwave_period%2Csea_level_height_msl%2Csea_surface_temperature%2Cocean_current_velocity%2Cocean_current_direction&timezone=GMT&velocity_unit=kmh&cell_selection=sea"
+      },
+      {
+        "weather": "https://archive-api.open-meteo.com/v1/archive?latitude=52.60831&longitude=1.73052&start_date=2025-01-01&end_date=2025-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cprecipitation%2Crain%2Cwind_speed_10m%2Cwind_gusts_10m%2Cpressure_msl%2Cweather_code&timezone=GMT&wind_speed_unit=kmh",
+        "marine": "https://marine-api.open-meteo.com/v1/marine?latitude=52.60831&longitude=1.73052&start_date=2025-01-01&end_date=2025-12-31&hourly=wave_height%2Cwave_period%2Csea_level_height_msl%2Csea_surface_temperature%2Cocean_current_velocity%2Cocean_current_direction&timezone=GMT&velocity_unit=kmh&cell_selection=sea"
+      },
+      {
+        "weather": "https://archive-api.open-meteo.com/v1/archive?latitude=52.60831&longitude=1.73052&start_date=2026-01-01&end_date=2026-06-30&hourly=temperature_2m%2Crelative_humidity_2m%2Cprecipitation%2Crain%2Cwind_speed_10m%2Cwind_gusts_10m%2Cpressure_msl%2Cweather_code&timezone=GMT&wind_speed_unit=kmh",
+        "marine": "https://marine-api.open-meteo.com/v1/marine?latitude=52.60831&longitude=1.73052&start_date=2026-01-01&end_date=2026-06-30&hourly=wave_height%2Cwave_period%2Csea_level_height_msl%2Csea_surface_temperature%2Cocean_current_velocity%2Cocean_current_direction&timezone=GMT&velocity_unit=kmh&cell_selection=sea"
+      }
+    ],
+    "attribution": [
+      "Weather and marine data: Open-Meteo; marine source models include DWD and Copernicus/ECMWF providers documented by Open-Meteo.",
+      "Flood warning records: Environment Agency copyright and/or database right; Open Government Licence v3.0."
+    ]
+  },
+  "returned_grid_coordinates": [
+    {
+      "range": {
+        "start": "2023-01-01",
+        "end": "2023-12-31"
+      },
+      "weather": {
+        "latitude": 52.618626,
+        "longitude": 1.6791044
+      },
+      "marine": {
+        "latitude": 52.625008,
+        "longitude": 1.8750153
+      }
+    },
+    {
+      "range": {
+        "start": "2024-01-01",
+        "end": "2024-12-31"
+      },
+      "weather": {
+        "latitude": 52.618626,
+        "longitude": 1.6791044
+      },
+      "marine": {
+        "latitude": 52.625008,
+        "longitude": 1.8750153
+      }
+    },
+    {
+      "range": {
+        "start": "2025-01-01",
+        "end": "2025-12-31"
+      },
+      "weather": {
+        "latitude": 52.618626,
+        "longitude": 1.6791044
+      },
+      "marine": {
+        "latitude": 52.625008,
+        "longitude": 1.8750153
+      }
+    },
+    {
+      "range": {
+        "start": "2026-01-01",
+        "end": "2026-06-30"
+      },
+      "weather": {
+        "latitude": 52.618626,
+        "longitude": 1.6791044
+      },
+      "marine": {
+        "latitude": 52.625008,
+        "longitude": 1.8750153
+      }
+    }
+  ],
+  "artifacts": {
+    "training_csv": "data/great-yarmouth-coastal-training.csv",
+    "warnings_csv": "data/great-yarmouth-warning-events.csv"
+  }
+}

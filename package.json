@@ -11,6 +11,9 @@
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "data:build": "node scripts/build-training-data.mjs",
+    "model:train": "node scripts/train-logistic-regression.mjs",
+    "model:rebuild": "npm run data:build && npm run model:train",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

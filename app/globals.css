@@ -1,29 +1,30 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap");
-
 :root {
-  --bg: #061419;
-  --bg-deep: #030d11;
-  --panel: #0a1d23;
-  --panel-raised: #0e252c;
-  --panel-soft: rgba(16, 41, 49, 0.7);
-  --text: #e9f3f1;
-  --text-soft: #adc3c2;
-  --muted: #6f8d8e;
-  --line: rgba(173, 216, 213, 0.12);
-  --line-strong: rgba(173, 216, 213, 0.22);
-  --mint: #70f0ca;
-  --mint-soft: #a4f7dc;
-  --blue: #54a7ff;
-  --amber: #ffc45b;
-  --orange: #ff8b5f;
-  --coral: #ff666f;
+  --bg: #ffffff;
+  --bg-deep: #ffffff;
+  --panel: #ffffff;
+  --panel-raised: #f6f6f6;
+  --panel-soft: #fafafa;
+  --text: #111111;
+  --text-soft: #303030;
+  --muted: #555555;
+  --line: #dddddd;
+  --line-strong: #b8b8b8;
+  --mint: #1f5a44;
+  --mint-soft: #2f6f57;
+  --blue: #1d4ed8;
+  --amber: #8a5a00;
+  --orange: #a33b00;
+  --coral: #9b1c1c;
   --max: 1380px;
   --risk-color: var(--mint);
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif !important;
 }
 
 html {
@@ -34,7 +35,7 @@ body {
   margin: 0;
   background: var(--bg-deep);
   color: var(--text);
-  font-family: Manrope, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: "Times New Roman", Times, serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -75,10 +76,7 @@ select:focus-visible {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 18% 8%, rgba(53, 129, 139, 0.14), transparent 28%),
-    radial-gradient(circle at 88% 18%, rgba(32, 87, 103, 0.16), transparent 24%),
-    linear-gradient(180deg, #07181e 0, #051318 48%, #030d11 100%);
+  background: #ffffff;
 }
 
 .app-shell::before {
@@ -88,8 +86,8 @@ select:focus-visible {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(rgba(151, 202, 201, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(151, 202, 201, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: linear-gradient(to bottom, black, transparent 70%);
 }
@@ -348,6 +346,102 @@ select:focus-visible {
   line-height: 1.85;
 }
 
+.study-hero {
+  padding: 92px 0 110px;
+}
+
+.study-title {
+  max-width: 1080px;
+}
+
+.study-title h1 {
+  max-width: 1040px;
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(48px, 6.4vw, 92px);
+  font-weight: 500;
+  letter-spacing: -0.065em;
+  line-height: 0.98;
+}
+
+.study-title .lead {
+  max-width: 780px;
+}
+
+.geography-heading {
+  display: grid;
+  grid-template-columns: 120px minmax(280px, 0.75fr) minmax(320px, 1fr);
+  gap: 25px;
+  align-items: start;
+  margin-top: 86px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.geography-heading > span,
+.geography-heading > strong {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.geography-heading > span {
+  color: var(--mint);
+}
+
+.geography-heading > strong {
+  color: var(--text);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.geography-heading > p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.geography-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 24px;
+  border-top: 1px solid var(--line-strong);
+  border-left: 1px solid var(--line-strong);
+}
+
+.geography-grid article {
+  display: flex;
+  min-height: 145px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  background: rgba(11, 31, 38, 0.72);
+}
+
+.geography-grid article > span,
+.geography-grid article > small {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.geography-grid article > span {
+  color: var(--mint);
+}
+
+.geography-grid article > strong {
+  color: var(--text);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(18px, 2vw, 27px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
 .location-control {
   padding: 22px;
   border: 1px solid var(--line-strong);
@@ -489,6 +583,7 @@ select:focus-visible {
 .risk-card.risk-advisory { --risk-color: var(--amber); }
 .risk-card.risk-warning { --risk-color: var(--orange); }
 .risk-card.risk-critical { --risk-color: var(--coral); }
+.risk-card.risk-unsafe { --risk-color: var(--coral); }
 
 .risk-card::after {
   position: absolute;
@@ -665,7 +760,7 @@ select:focus-visible {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 9px;
   padding: 20px 0;
   border-top: 1px solid var(--line);
@@ -1109,12 +1204,12 @@ select:focus-visible {
   line-height: 1.65;
 }
 
-.data-notice.snapshot {
+.data-notice.unavailable {
   border-color: rgba(255, 196, 91, 0.18);
   background: rgba(255, 196, 91, 0.035);
 }
 
-.data-notice.snapshot > span {
+.data-notice.unavailable > span {
   border-color: rgba(255, 196, 91, 0.4);
   color: var(--amber);
 }
@@ -1146,6 +1241,18 @@ select:focus-visible {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border: 1px solid var(--line-strong);
+}
+
+.score-row {
+  margin-top: 18px;
+}
+
+.confusion-count-row article > strong {
+  color: var(--mint-soft);
+}
+
+.score-row article > strong {
+  font-size: clamp(28px, 2.8vw, 42px);
 }
 
 .metric-row article {
@@ -1308,6 +1415,19 @@ select:focus-visible {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 4px;
+}
+
+.top-labels.binary-labels {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.side-labels.binary-labels {
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.matrix.binary-matrix {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
 }
 
 .matrix > div {
@@ -1619,6 +1739,9 @@ select:focus-visible {
   .topbar nav { display: none; }
   .overview-heading,
   .section-heading { grid-template-columns: 1fr; gap: 34px; }
+  .geography-heading { grid-template-columns: 110px 1fr; }
+  .geography-heading > p { grid-column: 2; }
+  .geography-grid { grid-template-columns: repeat(2, 1fr); }
   .location-control { width: min(100%, 520px); }
   .dashboard-grid { grid-template-columns: 1fr; }
   .context-panel { min-height: auto; }
@@ -1645,6 +1768,12 @@ select:focus-visible {
   .overview { padding: 55px 0 75px; }
   .overview h1,
   .section-heading h2 { font-size: clamp(38px, 11vw, 54px); }
+  .study-hero { padding: 62px 0 78px; }
+  .study-title h1 { font-size: clamp(43px, 13vw, 66px); }
+  .geography-heading { grid-template-columns: 1fr; margin-top: 58px; }
+  .geography-heading > p { grid-column: auto; }
+  .geography-grid { grid-template-columns: 1fr; }
+  .geography-grid article { min-height: 122px; }
   .lead { font-size: 13px; }
   .dashboard-grid { margin-top: 36px; }
   .risk-card,
@@ -1712,5 +1841,408 @@ select:focus-visible {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* White editorial theme and readable data presentation. */
+.live-dashboard {
+  padding: 115px 0;
+  border-top: 1px solid var(--line);
+}
+
+.topbar,
+.geography-grid article,
+.risk-card,
+.context-panel,
+.matrix-card,
+.importance-card,
+.dataset-card,
+.limitations-card,
+.metric-row article,
+.pipeline article,
+.weather-summary,
+.signal-card,
+.finding,
+.data-notice {
+  background: #ffffff;
+  color: #111111;
+  box-shadow: none;
+}
+
+.risk-card,
+.context-panel,
+.matrix-card,
+.importance-card,
+.dataset-card,
+.limitations-card,
+.metric-row,
+.pipeline,
+.geography-grid article {
+  border-color: var(--line-strong);
+}
+
+.risk-card::before,
+.context-panel::before,
+.matrix-card::before,
+.importance-card::before,
+.dataset-card::before,
+.limitations-card::before {
+  border-color: rgba(0, 0, 0, 0.04);
+}
+
+.risk-card::after {
+  opacity: 0.35;
+}
+
+.brand strong,
+.topbar nav a,
+.admin-access,
+.study-title h1,
+.section-heading h2,
+.geography-heading > strong,
+.geography-grid article > strong,
+.context-header strong,
+.panel-title h3,
+.metric-row article > strong,
+.importance-list strong,
+.dataset-list li,
+.limitations-card li,
+.pipeline strong,
+.dataset-stats strong,
+.live-data-table {
+  color: #111111;
+}
+
+.lead,
+.section-heading > p,
+.geography-heading > p,
+.risk-action,
+.panel-note,
+.finding p,
+.data-notice p,
+.dataset-list li,
+.limitations-card li p,
+.safety-note p,
+.footer > p {
+  color: #333333;
+}
+
+.brand small,
+.card-topline span,
+.card-topline small,
+.context-header span,
+.panel-title span,
+.panel-title em,
+.risk-verdict > p:first-child,
+.verdict-code,
+.probability-item span,
+.weather-summary span,
+.weather-summary dt,
+.freshness-row,
+.geography-grid article > span,
+.geography-grid article > small,
+.metric-row article > span,
+.importance-list span,
+.importance-list em,
+.pipeline article > span,
+.pipeline small,
+.pipeline p,
+.dataset-stats span,
+.dataset-list li span,
+.limitations-card li > span {
+  color: #555555;
+}
+
+.brand-mark {
+  border-color: #888888;
+  background: #ffffff;
+}
+
+.brand-mark i {
+  background: #555555;
+}
+
+.brand-mark::before {
+  background: #111111;
+  box-shadow: none;
+}
+
+.prototype-badge,
+.admin-access,
+.context-header button,
+.horizon {
+  border-color: #aaaaaa;
+  background: #ffffff;
+  color: #111111;
+}
+
+.risk-dial::before {
+  border-color: #d4d4d4;
+  background: #ffffff;
+  box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.06);
+}
+
+.risk-dial strong {
+  color: #111111;
+}
+
+.probability-track,
+.importance-list > div > div,
+.signal-meter {
+  background: #e5e5e5;
+}
+
+.probability-item strong {
+  color: #333333;
+}
+
+.probability-item.selected span,
+.probability-item.selected strong {
+  color: #111111;
+}
+
+.weather-summary,
+.live-table-wrap {
+  border: 1px solid var(--line);
+}
+
+.weather-glyph span {
+  border-color: #555555;
+  background: #eeeeee;
+}
+
+.live-table-wrap {
+  overflow-x: auto;
+}
+
+.live-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 17px;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.live-data-table th,
+.live-data-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.live-data-table thead th {
+  background: #f3f3f3;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.live-data-table tbody th {
+  width: 58%;
+  font-weight: 400;
+}
+
+.live-data-table tbody td:nth-child(2) {
+  font-size: 19px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.live-data-table tbody tr:last-child th,
+.live-data-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.weather-summary > div:nth-child(2) strong {
+  font-size: 38px;
+}
+
+.weather-summary > div:nth-child(2) span,
+.weather-summary dt,
+.weather-summary dd,
+.freshness-row,
+.data-notice p,
+.context-header button,
+.card-topline span,
+.card-topline small,
+.horizon,
+.risk-verdict > p:first-child,
+.verdict-code,
+.probability-item span,
+.probability-item strong,
+.risk-dial small {
+  font-size: 15px;
+}
+
+.context-header strong,
+.panel-title h3 {
+  font-size: 26px;
+}
+
+.panel-title span,
+.panel-title em,
+.geography-heading > span {
+  font-size: 15px;
+}
+
+.geography-grid article > span,
+.geography-grid article > small {
+  font-size: 14px;
+}
+
+.geography-grid article > strong {
+  font-size: 25px;
+}
+
+.metric-row article {
+  min-height: 158px;
+  padding: 25px;
+}
+
+.metric-row article > span {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.metric-row article > strong,
+.score-row article > strong {
+  margin-top: 20px;
+  font-size: clamp(38px, 3.5vw, 54px);
+  letter-spacing: -0.03em;
+}
+
+.confusion-count-row article > strong {
+  color: #111111;
+}
+
+.matrix-wrap {
+  grid-template-columns: 68px 66px minmax(300px, 1fr);
+  grid-template-rows: 34px 40px minmax(300px, 1fr);
+  width: min(100%, 570px);
+  margin-top: 30px;
+}
+
+.matrix-axis {
+  color: #333333;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.matrix-labels {
+  color: #222222;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.matrix > div {
+  border-color: color-mix(in srgb, var(--mint) 35%, white);
+  background: color-mix(in srgb, var(--mint) calc(var(--cell-alpha) * 18%), white);
+  color: #111111;
+  font-size: 34px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.matrix > div.diagonal {
+  background: color-mix(in srgb, var(--mint) calc(var(--cell-alpha) * 42%), white);
+  color: #111111;
+}
+
+.panel-note {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.importance-list {
+  gap: 25px;
+}
+
+.importance-list > div {
+  grid-template-columns: 34px minmax(150px, 0.9fr) minmax(130px, 1.2fr) 44px;
+}
+
+.importance-list span,
+.importance-list em {
+  font-size: 14px;
+}
+
+.importance-list strong {
+  font-size: 17px;
+}
+
+.finding span,
+.finding p {
+  font-size: 15px;
+}
+
+.pipeline article > span,
+.pipeline small,
+.pipeline p {
+  font-size: 15px;
+}
+
+.pipeline small {
+  font-weight: 700;
+}
+
+.dataset-stats span,
+.dataset-list li,
+.limitations-card li strong,
+.limitations-card li p,
+.dataset-list li span,
+.limitations-card li > span {
+  font-size: 15px;
+}
+
+.dataset-stats strong {
+  font-size: clamp(25px, 2.2vw, 34px);
+}
+
+.safety-note strong,
+.safety-note p,
+.footer > p,
+.footer > a,
+.brand small,
+.brand strong,
+.admin-access,
+.prototype-badge {
+  font-size: 15px;
+}
+
+@media (max-width: 760px) {
+  .live-dashboard,
+  .evidence,
+  .method {
+    padding: 78px 0;
+  }
+
+  .live-data-table {
+    min-width: 500px;
+  }
+
+  .matrix-wrap {
+    grid-template-columns: 54px 55px minmax(230px, 1fr);
+    grid-template-rows: 32px 38px minmax(250px, 1fr);
+  }
+
+  .matrix > div {
+    font-size: 26px;
+  }
+
+  .importance-list > div {
+    grid-template-columns: 30px 130px minmax(80px, 1fr) 38px;
+  }
+}
+
+@media (max-width: 430px) {
+  .context-header {
+    flex-direction: column;
+  }
+
+  .matrix-card {
+    overflow-x: auto;
+  }
+
+  .matrix-wrap {
+    min-width: 410px;
   }
 }

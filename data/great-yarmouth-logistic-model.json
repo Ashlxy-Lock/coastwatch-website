@@ -1,0 +1,270 @@
+{
+  "model": "Binary Logistic Regression",
+  "version": "coastal-risk-logreg-great-yarmouth-v2",
+  "generated_at_utc": "2026-08-17T19:13:49.825Z",
+  "training_period": "2023-01-01..2024-12-31",
+  "validation_period": "2025-01-01..2025-12-31",
+  "test_period": "2026-01-01..2026-06-30",
+  "feature_names": [
+    "temperature_2m_c",
+    "relative_humidity_2m_percent",
+    "rain_mm",
+    "wind_speed_10m_kmh",
+    "wind_gusts_10m_kmh",
+    "pressure_msl_hpa",
+    "wave_height_m",
+    "wave_period_s",
+    "sea_level_height_msl_m",
+    "sea_surface_temperature_c",
+    "ocean_current_velocity_kmh",
+    "hour_sin",
+    "hour_cos",
+    "day_of_year_sin",
+    "day_of_year_cos"
+  ],
+  "medians": [
+    11.1,
+    83,
+    0,
+    15.6,
+    30.6,
+    1014.2,
+    0.78,
+    4.95,
+    -0.27,
+    12.1,
+    2.5,
+    0,
+    0,
+    -0.02581844,
+    0.02574791
+  ],
+  "means": [
+    11.4046854161,
+    81.1926935344,
+    0.0928559003,
+    16.5371354016,
+    32.1980168165,
+    1013.4133719919,
+    0.8549109887,
+    5.1249156277,
+    -0.3199936213,
+    12.2102580458,
+    2.395766889,
+    0.0004404612,
+    -0.0003824734,
+    -0.0063558221,
+    0.0144058057
+  ],
+  "scales": [
+    5.3039369581,
+    11.0353045285,
+    0.3747046655,
+    7.7604447841,
+    14.5693330883,
+    12.0485440662,
+    0.44442284,
+    1.2374814302,
+    0.6273652028,
+    4.7405862852,
+    1.2256618967,
+    0.7070861421,
+    0.7071271794,
+    0.7108461376,
+    0.7031712769
+  ],
+  "coefficients": [
+    -0.5409171478,
+    -0.3879176923,
+    0.0786629855,
+    0.3291333026,
+    0.316351454,
+    0.0068735608,
+    0.0635686018,
+    0.014539867,
+    0.4884535517,
+    -0.0307809479,
+    0.2721893313,
+    0.0585524843,
+    0.0769471562,
+    0.0595116075,
+    0.7958763417
+  ],
+  "intercept": -1.4092475613,
+  "decision_threshold": 0.76,
+  "threshold_policy": "Selected on the 2025 validation year from thresholds 0.75..0.95 by maximum unsafe F2; the 2026 holdout is not used for threshold tuning.",
+  "class_weights": [
+    0.5084620828,
+    30.043554007
+  ],
+  "hyperparameters": {
+    "epochs": 900,
+    "learningRate": 0.035,
+    "l2": 0.02,
+    "optimizer": "Adam"
+  },
+  "rows": 30031,
+  "warning_events": 16,
+  "label_counts": {
+    "safe": 29672,
+    "unsafe": 359
+  },
+  "splits": {
+    "train_2023_2024": {
+      "rows": 17245,
+      "labels": {
+        "safe": 16958,
+        "unsafe": 287
+      }
+    },
+    "validation_2025": {
+      "rows": 8442,
+      "labels": {
+        "safe": 8394,
+        "unsafe": 48
+      }
+    },
+    "test_2026": {
+      "rows": 4344,
+      "labels": {
+        "safe": 4320,
+        "unsafe": 24
+      }
+    }
+  },
+  "validation_threshold_metrics": {
+    "threshold": 0.76,
+    "matrix": [
+      [
+        8011,
+        383
+      ],
+      [
+        35,
+        13
+      ]
+    ],
+    "metrics": {
+      "accuracy": 0.9504856669035774,
+      "balanced_accuracy": 0.6126027519656898,
+      "macro_f1": 0.5165663839021504,
+      "safe": {
+        "precision": 0.9956500124285359,
+        "recall": 0.9543721705980462,
+        "f1": 0.9745742092457421,
+        "support": 8394
+      },
+      "unsafe": {
+        "precision": 0.03282828282828283,
+        "recall": 0.2708333333333333,
+        "f1": 0.05855855855855856,
+        "support": 48
+      }
+    },
+    "unsafe_f2": 0.11054421768707483
+  },
+  "test_confusion_matrix": [
+    [
+      4036,
+      284
+    ],
+    [
+      2,
+      22
+    ]
+  ],
+  "test_metrics": {
+    "accuracy": 0.9341620626151013,
+    "balanced_accuracy": 0.9254629629629629,
+    "macro_f1": 0.5495573103613305,
+    "safe": {
+      "precision": 0.9995047052996533,
+      "recall": 0.9342592592592592,
+      "f1": 0.9657812873893276,
+      "support": 4320
+    },
+    "unsafe": {
+      "precision": 0.0718954248366013,
+      "recall": 0.9166666666666666,
+      "f1": 0.13333333333333333,
+      "support": 24
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "day_of_year_cos",
+      "coefficient": 0.7958763417,
+      "relative_importance": 100
+    },
+    {
+      "feature": "temperature_2m_c",
+      "coefficient": -0.5409171478,
+      "relative_importance": 68
+    },
+    {
+      "feature": "sea_level_height_msl_m",
+      "coefficient": 0.4884535517,
+      "relative_importance": 61
+    },
+    {
+      "feature": "relative_humidity_2m_percent",
+      "coefficient": -0.3879176923,
+      "relative_importance": 49
+    },
+    {
+      "feature": "wind_speed_10m_kmh",
+      "coefficient": 0.3291333026,
+      "relative_importance": 41
+    },
+    {
+      "feature": "wind_gusts_10m_kmh",
+      "coefficient": 0.316351454,
+      "relative_importance": 40
+    },
+    {
+      "feature": "ocean_current_velocity_kmh",
+      "coefficient": 0.2721893313,
+      "relative_importance": 34
+    },
+    {
+      "feature": "rain_mm",
+      "coefficient": 0.0786629855,
+      "relative_importance": 10
+    },
+    {
+      "feature": "hour_cos",
+      "coefficient": 0.0769471562,
+      "relative_importance": 10
+    },
+    {
+      "feature": "wave_height_m",
+      "coefficient": 0.0635686018,
+      "relative_importance": 8
+    },
+    {
+      "feature": "day_of_year_sin",
+      "coefficient": 0.0595116075,
+      "relative_importance": 7
+    },
+    {
+      "feature": "hour_sin",
+      "coefficient": 0.0585524843,
+      "relative_importance": 7
+    },
+    {
+      "feature": "sea_surface_temperature_c",
+      "coefficient": -0.0307809479,
+      "relative_importance": 4
+    },
+    {
+      "feature": "wave_period_s",
+      "coefficient": 0.014539867,
+      "relative_importance": 2
+    },
+    {
+      "feature": "pressure_msl_hpa",
+      "coefficient": 0.0068735608,
+      "relative_importance": 1
+    }
+  ]
+}
